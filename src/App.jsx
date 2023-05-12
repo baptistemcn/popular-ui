@@ -1,10 +1,13 @@
 import "./App.css";
+import { Popular } from "./components/Popular";
 
 function App() {
   return (
-    <>
-      <h1>Hello World</h1>
-    </>
+    <div className="light">
+      <div className="container">
+        <Popular />
+      </div>
+    </div>
   );
 }
 
