@@ -1,5 +1,28 @@
 import * as React from "react";
 
+// eslint-disable-next-line react-refresh/only-export-components
+function LanguagesNav({ selected, onUpdateLanguage }) {
+  const languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python"];
+
+  return (
+    <select
+      onChange={(e) => onUpdateLanguage(e.target.value)}
+      selected={selected}
+    >
+      {languages.map((language) => (
+        <option key={language} value={language}>
+          {language}
+        </option>
+      ))}
+    </select>
+  );
+}
+
+LanguagesNav.propTypes = {
+  selected: React.ReactPropTypes.string.isRequired,
+  onUpdateLanguage: React.ReactPropTypes.func.isRequired,
+};
+
 export default class Popular extends React.Component {
   constructor(props) {
     super(props);
@@ -18,21 +41,16 @@ export default class Popular extends React.Component {
   }
 
   render() {
-    const languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python"];
+    const { languages } = this.state;
 
     return (
-      <>
-        <select
-          onChange={(e) => this.updateLanguage(e.target.value)}
-          selected={this.state.selectedLanguage}
-        >
-          {languages.map((language) => (
-            <option key={language} value={language}>
-              {language}
-            </option>
-          ))}
-        </select>
-      </>
+      <main>
+        <LanguagesNav
+          selected={languages}
+          onUpdateLanguage={this.updateLanguage}
+        />
+        {JSON.stringify(this.state, null, 2)}
+      </main>
     );
   }
 }
