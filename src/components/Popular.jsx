@@ -1,6 +1,6 @@
 import * as React from "react";
 
-// eslint-disable-next-line react-refresh/only-export-components
+// eslint-disable-next-line react-refresh/only-export-components, react/prop-types
 function LanguagesNav({ selected, onUpdateLanguage }) {
   const languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python"];
 
@@ -17,11 +17,6 @@ function LanguagesNav({ selected, onUpdateLanguage }) {
     </select>
   );
 }
-
-LanguagesNav.propTypes = {
-  selected: React.ReactPropTypes.string.isRequired,
-  onUpdateLanguage: React.ReactPropTypes.func.isRequired,
-};
 
 export default class Popular extends React.Component {
   constructor(props) {
