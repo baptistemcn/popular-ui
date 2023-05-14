@@ -2,13 +2,9 @@
 import * as React from "react";
 
 export default class Delayed extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      show: false,
-    };
-  }
+  state = {
+    show: false,
+  };
 
   componentDidMount() {
     this.timeout = window.setTimeout(() => {

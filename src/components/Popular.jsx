@@ -22,18 +22,12 @@ function LanguagesNav({ selected, onUpdateLanguage }) {
 }
 
 export default class Popular extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      selectedLanguage: "All",
-      loading: true,
-      repos: null,
-      error: null,
-    };
-
-    this.updateLanguage = this.updateLanguage.bind(this);
-  }
+  state = {
+    selectedLanguage: "All",
+    loading: true,
+    repos: null,
+    error: null,
+  };
 
   componentDidMount() {
     this.updateLanguage(this.state.selectedLanguage);
