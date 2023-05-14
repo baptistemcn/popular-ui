@@ -1,5 +1,6 @@
 import * as React from "react";
 import { fetchPopularRepos } from "../utils/api";
+import Table from "./Table";
 
 // eslint-disable-next-line react-refresh/only-export-components, react/prop-types
 function LanguagesNav({ selected, onUpdateLanguage }) {
@@ -73,7 +74,7 @@ export default class Popular extends React.Component {
 
         {error && <p className="text-center error">{error}</p>}
 
-        {repos && <pre>{JSON.stringify(repos, null, 2)}</pre>}
+        {repos && <Table repos={repos} />}
       </main>
     );
   }
