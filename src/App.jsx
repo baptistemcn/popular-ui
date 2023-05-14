@@ -1,9 +1,11 @@
 import * as React from "react";
 import "./App.css";
 import { NotFound } from "./components/404";
-import Popular from "./components/Popular";
 import Nav from "./components/Nav";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Loading from "./components/Loading";
+
+const Popular = React.lazy(() => import("./components/Popular"));
 
 class App extends React.Component {
   state = {
@@ -22,10 +24,12 @@ class App extends React.Component {
         <div className={this.state.theme}>
           <div className="container">
             <Nav theme={this.state.theme} toggleTheme={this.toggleTheme} />
-            <Routes>
-              <Route path="/" element={<Popular />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <React.Suspense fallback={<Loading />}>
+              <Routes>
+                <Route path="/" element={<Popular />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </React.Suspense>
           </div>
         </div>
       </Router>
