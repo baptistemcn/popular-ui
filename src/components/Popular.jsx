@@ -1,6 +1,7 @@
 import * as React from "react";
 import { fetchPopularRepos } from "../utils/api";
 import Table from "./Table";
+import Loading from "./Loading";
 
 // eslint-disable-next-line react-refresh/only-export-components, react/prop-types
 function LanguagesNav({ selected, onUpdateLanguage }) {
@@ -26,6 +27,7 @@ export default class Popular extends React.Component {
 
     this.state = {
       selectedLanguage: "All",
+      loading: true,
       repos: null,
       error: null,
     };
@@ -48,6 +50,7 @@ export default class Popular extends React.Component {
         this.setState({
           repos,
           error: null,
+          loading: false,
         })
       )
       .catch((error) => {
@@ -60,7 +63,7 @@ export default class Popular extends React.Component {
   }
 
   render() {
-    const { selectedLanguage, repos, error } = this.state;
+    const { selectedLanguage, repos, error, loading } = this.state;
 
     return (
       <main className="stack main-stack animate-in">
@@ -71,6 +74,8 @@ export default class Popular extends React.Component {
             onUpdateLanguage={this.updateLanguage}
           />
         </div>
+
+        {loading && <Loading />}
 
         {error && <p className="text-center error">{error}</p>}
 
