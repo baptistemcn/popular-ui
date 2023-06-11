@@ -1,33 +1,40 @@
-/* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
 import { sunIcon, moonIcon } from "./icons";
+import { ThemeConsumer } from "../context/theme";
 
-export default function Nav({ theme, toggleTheme }) {
+// eslint-disable-next-line react/prop-types
+export default function Nav({ toggleTheme }) {
   return (
-    <nav className="split">
-      <NavLink
-        to="/"
-        className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-      >
-        Popular UI
-      </NavLink>
-      <ul className="row">
-        <li>
+    <ThemeConsumer>
+      {(theme) => (
+        <nav className="split">
           <NavLink
             to="/"
             className={({ isActive }) =>
-              "nav-link " + (isActive ? " active" : "")
+              "nav-link" + (isActive ? " active" : "")
             }
           >
-            Popular
+            Popular UI
           </NavLink>
-        </li>
-        <li>
-          <button className="btn secondary icon" onClick={toggleTheme}>
-            {theme === "light" ? moonIcon : sunIcon}
-          </button>
-        </li>
-      </ul>
-    </nav>
+          <ul className="row">
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  "nav-link " + (isActive ? " active" : "")
+                }
+              >
+                Popular
+              </NavLink>
+            </li>
+            <li>
+              <button className="btn secondary icon" onClick={toggleTheme}>
+                {theme === "light" ? moonIcon : sunIcon}
+              </button>
+            </li>
+          </ul>
+        </nav>
+      )}
+    </ThemeConsumer>
   );
 }

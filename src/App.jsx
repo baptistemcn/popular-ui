@@ -4,26 +4,22 @@ import { NotFound } from "./components/404";
 import Nav from "./components/Nav";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./components/Loading";
+import { ThemeProvider } from "./context/theme";
 
 const Popular = React.lazy(() => import("./components/Popular"));
 
-class App extends React.Component {
-  state = {
-    theme: "light",
-  };
+function App() {
+  const [theme, setTheme] = React.useState("light");
 
-  toggleTheme = () => {
-    this.setState(({ theme }) => ({
-      theme: theme === "light" ? "dark" : "light",
-    }));
-  };
+  const toogleTheme = () =>
+    setTheme((theme) => (theme === "light" ? "dark" : "light"));
 
-  render() {
-    return (
-      <Router>
-        <div className={this.state.theme}>
+  return (
+    <Router>
+      <ThemeProvider value={theme}>
+        <div className={theme}>
           <div className="container">
-            <Nav theme={this.state.theme} toggleTheme={this.toggleTheme} />
+            <Nav toggleTheme={toogleTheme} />
             <React.Suspense fallback={<Loading />}>
               <Routes>
                 <Route path="/" element={<Popular />} />
@@ -32,9 +28,9 @@ class App extends React.Component {
             </React.Suspense>
           </div>
         </div>
-      </Router>
-    );
-  }
+      </ThemeProvider>
+    </Router>
+  );
 }
 
 export default App;
